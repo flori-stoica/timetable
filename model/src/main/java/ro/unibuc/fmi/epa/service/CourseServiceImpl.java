@@ -6,26 +6,38 @@ import ro.unibuc.fmi.epa.model.Professor;
 import ro.unibuc.fmi.epa.model.Room;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
-public class CourseServiceImpl implements CourseService {
+import static ro.unibuc.fmi.epa.db.Database.COURSE_LIST;
+
+public final class CourseServiceImpl implements CourseService {
 
     @Override
     public Collection<Course> getCourses() {
-        return null;
+        return COURSE_LIST;
     }
 
     @Override
     public Collection<Course> getCourses(Room room) {
-        return null;
+        return COURSE_LIST
+                .stream()
+                .filter(c -> c.getRoom().equals(room))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<Course> getCourses(Professor professor) {
-        return null;
+        return COURSE_LIST
+                .stream()
+                .filter(c -> c.getProfessor().equals(professor))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<Course> getCourses(Class clazz) {
-        return null;
+        return COURSE_LIST
+                .stream()
+                .filter(c -> c.getClazz().equals(clazz))
+                .collect(Collectors.toList());
     }
 }
